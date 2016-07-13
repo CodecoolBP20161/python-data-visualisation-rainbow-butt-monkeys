@@ -5,7 +5,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
-connect_str = "dbname = 'makaimark' user = 'makaimark' host = 'localhost' password = '920410'"
+connect_str = "dbname = 'svindler' user = 'svindler' host = 'localhost' password = 'codecool'"
 conn = psycopg2.connect(connect_str)
 # prepare a cursor object using cursor() method
 cursor = conn.cursor()

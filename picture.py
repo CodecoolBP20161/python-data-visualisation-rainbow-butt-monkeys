@@ -30,7 +30,7 @@ class Picture():
         img.save('sample-out.png')
 
 '''
-        img = Image.new("RGB", (1366, 768), "red")
+        img = Image.new("RGB", (1366, 768), "black")
         draw = ImageDraw.Draw(img)
         # font = ImageFont.truetype(<font-file>, <font-size>)
         fnt = ImageFont.truetype("beyond_the_mountains.ttf", 48)
