@@ -2,6 +2,7 @@ from textbox import TextBox
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+import random
 
 class Picture():
     list_of_textboxes = []
@@ -13,36 +14,18 @@ class Picture():
 
     @classmethod
     def drawer(self):
-        '''img = Image.new("RGB", (1366, 768), "Red")
+        img = Image.new("RGB", (1366, 768), "white")
         draw = ImageDraw.Draw(img)
-        # font = ImageFont.truetype(<font-file>, <font-size>)
-        fnt = ImageFont.truetype("sans-serif.ttf", self.list_of_textboxes[0].size)
-        text_options = {
-            'fill': (255, 255, 255)
-        }
-        text_content = self.list_of_textboxes[0].company_name
-        text_size = draw.textsize(text_content)
-        # draw.text((x, y),text_content,(r,g,b))
-        draw.text((0, 0), text_content, font = fnt, **text_options)
-        # draw.text((0, text_size[1]), text_content, **text_options)
-        # draw.text((text_size[0], 0), text_content, **text_options)
-        # draw.text(text_size, text_content, **text_options)
-        img.save('sample-out.png')
+        for i in self.list_of_textboxes:
+            # font = ImageFont.truetype(<font-file>, <font-size>)
+            fnt = ImageFont.truetype("beyond_the_mountains.ttf", i.size)
 
-'''
-        img = Image.new("RGB", (1366, 768), "red")
-        draw = ImageDraw.Draw(img)
-        # font = ImageFont.truetype(<font-file>, <font-size>)
-        fnt = ImageFont.truetype("beyond_the_mountains.ttf", 48)
-        text_options = {
-            'fill': (255, 255, 255)
-        }
-        text_content = self.list_of_textboxes[0].company_name
-        text_size = draw.textsize(text_content)
-        # draw.text((x, y),text_content,(r,g,b))
-        draw.text((0, 0), text_content, font=fnt, **text_options)
-        # draw.text((0, text_size[1]), text_content, **text_options)
-        # draw.text((text_size[0], 0), text_content, **text_options)
-        # draw.text(text_size, text_content, **text_options)
+            text_content = i.company_name
+            text_size = draw.textsize(text_content)
+            # draw.text((x, y),text_content,(r,g,b))
+            rand_num1 = random.randint(100, 1200)
+            rand_num2 = random.randint(100, 700)
+            draw.text((rand_num1, rand_num2), text_content, font=fnt, fill = i.color)
+            # draw.text((0, text_size[1]), text_content, **text_options)
         img.save('sample-out.png')
 

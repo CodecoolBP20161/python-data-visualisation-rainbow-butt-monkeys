@@ -37,7 +37,7 @@ try:
         if i[1] != 0:
             for k, v in dictionary.items():
                 if i[0] == k:
-                    Picture.add_to_textboxes(dictionary[k], 50*int(i[1]), k)
+                    Picture.add_to_textboxes(dictionary[k], 25*int(i[1]), k)
 
     # print(Picture.list_of_textboxes[5].color, Picture.list_of_textboxes[5].size, Picture.list_of_textboxes[5].company_name)
     Picture.drawer()
