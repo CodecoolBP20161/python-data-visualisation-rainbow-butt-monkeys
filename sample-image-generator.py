@@ -16,9 +16,7 @@ sql_1 = "SELECT company_name, COUNT(name) FROM project \
 sql_2 = "SELECT company_name, main_color FROM project"
 
 try:
-    # Execute the SQL command
     cursor.execute(sql_1)
-    # Fetch all the rows in a list of lists.
     results_1 = cursor.fetchall()
     cursor.execute(sql_2)
     results_2 = cursor.fetchall()
@@ -39,7 +37,6 @@ try:
                 if i[0] == k:
                     Picture.add_to_textboxes(dictionary[k], 25*int(i[1]), k)
 
-    # print(Picture.list_of_textboxes[5].color, Picture.list_of_textboxes[5].size, Picture.list_of_textboxes[5].company_name)
     Picture.drawer()
 
 except Exception as e:
