@@ -24,7 +24,6 @@ try:
             all_companies.append(company)
         else:
             pass
-    # print(all_companies)
 
 except Exception as e:
     print("Uh oh, can't connect. Invalid dbname, user or password?")
@@ -38,24 +37,39 @@ class ProjectByCurrency:
         self.budget_currency = budget_currency
         self.main_color = main_color
 
+
     @staticmethod
     def currency_change(projects):
         for i in projects:
-            if i != None:
+            if i[0] != None:
                 if i[2] == "USD":
                     i[1] = i[1] / 1.4
                     i[2] = "EUR"
                 if i[2] == "GBP":
                     i[1] = i[1] * 0.8
                     i[2] = "EUR"
+            elif i[0] == None:
+                pass
         return projects
 
 projects = []
 all_companies = ProjectByCurrency.currency_change(all_companies)
 
+
+def getKey(item):
+    return (item[1])
+
+
 for i in all_companies:
     project = ProjectByCurrency(i[0], i[1], i[2], i[3])
     projects.append(project)
-
+all = []
 for i in projects:
-    print(i.budget_value)
+    now = []
+    if i.name != None:
+        now.append(i.name)
+        now.append(round(i.budget_value))
+        now.append(i.main_color)
+        all.append(now)
+
+print(sorted(all, key=getKey, reverse=True))
