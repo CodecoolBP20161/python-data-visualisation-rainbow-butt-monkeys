@@ -22,11 +22,10 @@ class Picture():
 
             text_content = i.company_name
             text_size = draw.textsize(text_content)
-            # draw.text((x, y),text_content,(r,g,b))
             rand_num1 = random.randint(100, 1200)
             rand_num2 = random.randint(100, 700)
             draw.text((rand_num1, rand_num2), text_content, font=fnt, fill = i.color)
-            # draw.text((0, text_size[1]), text_content, **text_options)
+            # draw.text(Picture.generate_coords(Picture.list_of_reserved_coordinates, i), text_content, font=fnt, fill=i.color)
         img.save('sample-out.png')
 
 
@@ -54,4 +53,5 @@ class Picture_2():
             draw.text((rand_num1, rand_num2), text_content, font=fnt, fill = i.color)
             # draw.text((0, text_size[1]), text_content, **text_options)
         img.save('currency.png')
+
 
