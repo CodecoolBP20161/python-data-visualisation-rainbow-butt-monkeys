@@ -1,25 +1,10 @@
 from textbox import TextBox
 import psycopg2
+from picture import Picture
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
-'''
-img = Image.new("RGB", (512, 512), "red")
-draw = ImageDraw.Draw(img)
-# font = ImageFont.truetype(<font-file>, <font-size>)
-# font = ImageFont.truetype("sans-serif.ttf", 16)
-text_options = {
-    'fill': (255, 255, 255)
-}
-text_content = "Sample Text"
-text_size = draw.textsize(text_content)
-# draw.text((x, y),text_content,(r,g,b))
-draw.text((0, 0), text_content, **text_options)
-draw.text((0, text_size[1]), text_content, **text_options)
-draw.text((text_size[0], 0), text_content, **text_options)
-draw.text(text_size, text_content, **text_options)
-img.save('sample-out.png')
-'''
+
 connect_str = "dbname = 'makaimark' user = 'makaimark' host = 'localhost' password = '920410'"
 conn = psycopg2.connect(connect_str)
 # prepare a cursor object using cursor() method
@@ -32,9 +17,9 @@ sql_2 = "SELECT company_name, main_color FROM project"
 
 try:
     # Execute the SQL command
-    # cursor.execute(sql_1)
+    cursor.execute(sql_1)
     # Fetch all the rows in a list of lists.
-    # results_1 = cursor.fetchall()
+    results_1 = cursor.fetchall()
     cursor.execute(sql_2)
     results_2 = cursor.fetchall()
     dictionary = {}
@@ -45,12 +30,20 @@ try:
         else:
             dictionary.setdefault(row[0], []).append(row[1])
 
-    # print(dictionary)
     for k, v in dictionary.items():
-        v = TextBox.avg_color(v)
-        print(v)
-    # print(dictionary)
+        dictionary[k] = TextBox.avg_color(v)
+    print(dictionary)
 
+    print(results_1)
+
+    for i in results_1:
+        if i[1] != 0:
+            for k, v in dictionary.items():
+                if i[0] == k:
+                    Picture.add_to_textboxes(dictionary[k], i[1], k)
+
+    # print(Picture.list_of_textboxes[5].color, Picture.list_of_textboxes[5].size, Picture.list_of_textboxes[5].company_name)
+    Picture.drawer()
 
 except Exception as e:
     print(e)

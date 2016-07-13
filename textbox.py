@@ -1,13 +1,12 @@
 
 class TextBox():
-    company_name = ""
-    color = (0, 0, 0)
-    size = 0
 
     def __init__(self, name, color, size):
         self.company_name = name
         self.color = color
         self.size = size
+
+
 
     @staticmethod
     def hex_to_rgb(value):
