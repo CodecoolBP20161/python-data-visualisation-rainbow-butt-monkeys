@@ -6,7 +6,7 @@ from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
-connect_str = "dbname = 'makaimark' user = 'makaimark' host = 'localhost' password = '920110'"
+connect_str = "dbname = 'svindler' user = 'svindler' host = 'localhost' password = 'codecool'"
 conn = psycopg2.connect(connect_str)
 # prepare a cursor object using cursor() method
 cursor = conn.cursor()
@@ -66,7 +66,7 @@ def projects_by_currency():
 
         for i in result:
             Picture_2.add_to_textboxes(i[0], i[2], i[1])
-            print(i)
+            # print(i)
         Picture_2.drawer()
 
     except Exception as e:
