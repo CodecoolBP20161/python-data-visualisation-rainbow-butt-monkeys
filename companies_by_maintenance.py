@@ -23,7 +23,6 @@ class CompaneiesByMaintenance:
                     dictionary.setdefault(row.company_name, []).append(row.maintenance_requested)
                     dictionary.setdefault([row.company_name].append(row.main_color))
         list = []
-
         for k, v in dictionary.items():
             if v != None:
                 sublist = []
@@ -36,7 +35,4 @@ class CompaneiesByMaintenance:
                         a += 1
                 sublist.append(a*8)
                 list.append(sublist)
-
         return list
-
-
