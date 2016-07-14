@@ -38,11 +38,8 @@ class ProjectByCurrency:
             now = []
             if i.name != None:
                 now.append(i.name)
-                now.append(round(i.budget_value / 100))
+                now.append(round(i.budget_value / 150))
                 now.append(i.main_color)
                 all.append(now)
 
         return sorted(all, key=getKey, reverse=True)
-
-
-# print(ProjectByCurrency.make_reverse_order(all_companies))

@@ -1,4 +1,4 @@
-name = "svindler"
-dbname = "svindler"
+name = "makaimark"
+dbname = "makaimark"
 host = "localhost"
-password = "codecool"
+password = "920410"
