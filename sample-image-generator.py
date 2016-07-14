@@ -2,11 +2,12 @@ from textbox import TextBox
 import psycopg2
 from picture import Picture, Picture_2
 from project_names_by_currency import ProjectByCurrency
+import config
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
 
-connect_str = "dbname = 'svindler' user = 'svindler' host = 'localhost' password = 'codecool'"
+connect_str = "dbname = '%s' user = '%s' host = '%s' password = '%s'" % (config.dbname, config.name, config.host, config.password)
 conn = psycopg2.connect(connect_str)
 # prepare a cursor object using cursor() method
 cursor = conn.cursor()
@@ -17,32 +18,31 @@ sql_1 = "SELECT company_name, COUNT(name) FROM project \
 sql_2 = "SELECT company_name, main_color FROM project"
 sql_3 = "SELECT name, budget_value, budget_currency, main_color FROM project;"
 
-try:
-    cursor.execute(sql_1)
-    results_1 = cursor.fetchall()
-    cursor.execute(sql_2)
-    results_2 = cursor.fetchall()
-    dictionary = {}
-    for row in results_2:
-        if row[0] not in dictionary:
-            dictionary.setdefault(row[0], [])
-            dictionary[row[0]].append(row[1])
-        else:
-            dictionary.setdefault(row[0], []).append(row[1])
 
-    for k, v in dictionary.items():
-        dictionary[k] = TextBox.avg_color(v)
+cursor.execute(sql_1)
+results_1 = cursor.fetchall()
+cursor.execute(sql_2)
+results_2 = cursor.fetchall()
+dictionary = {}
+for row in results_2:
+    if row[0] not in dictionary:
+        dictionary.setdefault(row[0], [])
+        dictionary[row[0]].append(row[1])
+    else:
+        dictionary.setdefault(row[0], []).append(row[1])
 
-    for i in results_1:
-        if i[1] != 0:
-            for k, v in dictionary.items():
-                if i[0] == k:
-                    Picture.add_to_textboxes(dictionary[k], 25*int(i[1]), k)
+for k, v in dictionary.items():
+    dictionary[k] = TextBox.avg_color(v)
 
-    Picture.drawer()
+for i in results_1:
+    if i[1] != 0:
+        for k, v in dictionary.items():
+            if i[0] == k:
+                Picture.add_to_textboxes(dictionary[k], 25*int(i[1]), k)
 
-except Exception as e:
-    print(e)
+Picture.drawer()
+
+
 
 def projects_by_currency():
     try:

@@ -5,7 +5,7 @@ class TextBox():
         self.company_name = name
         self.color = color
         self.size = size
-
+        self.coordinate = ((0,0),(0,0))
 
 
     @staticmethod
