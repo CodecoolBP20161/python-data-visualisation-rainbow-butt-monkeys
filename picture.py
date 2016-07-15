@@ -33,22 +33,24 @@ class Picture():
         if len(self.list_of_reserved_coordinates) == 0:
             tp_xy = Picture.randomize()
             tp = ((tp_xy[0], tp_xy[1]), (tp_xy[0] + size[0], tp_xy[1] + size[1]))
-            if tp[1][0] > 1366 or tp[1][1] > 768:
-                self.put_in_list(size)
-            else:
+            if tp[1][0] < 1360 and tp[1][1] < 760:
                 self.list_of_reserved_coordinates.append(tp)
                 return tp
         else:
-            while True:
+            counter = 0
+            while counter < 500:
                 good = True
                 tp_xy = Picture.randomize()
                 tp = ((tp_xy[0], tp_xy[1]), (tp_xy[0] + size[0], tp_xy[1] + size[1]))
-                for j in range(len(self.list_of_reserved_coordinates)):
-                    if self.is_overlapping(tp, self.list_of_reserved_coordinates[j]):
-                        good = False
-                if good == True:
-                    self.list_of_reserved_coordinates.append(tp)
-                    return tp
+                counter += 1
+                if tp[1][0] < 1360 and tp[1][1] < 760:
+                    for j in range(len(self.list_of_reserved_coordinates)):
+                        if self.is_overlapping(tp, self.list_of_reserved_coordinates[j]):
+                            good = False
+                    if good == True:
+                        self.list_of_reserved_coordinates.append(tp)
+                        return tp
+            return ((2000, 1000), (4000, 5000))
 
 
     @classmethod
@@ -56,7 +58,7 @@ class Picture():
         img = Image.new("RGB", (1366, 768), "white")
         draw = ImageDraw.Draw(img)
         for i in self.list_of_textboxes:
-            fnt = ImageFont.truetype("beyond_the_mountains.ttf", i.size)
+            fnt = ImageFont.truetype("DK Cinnabar Brush.ttf", i.size)
             text_content = i.company_name
             text_size = draw.textsize(text_content, font=fnt)
             temp_coord = Picture.put_in_list(text_size)

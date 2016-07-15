@@ -9,8 +9,8 @@ class CompaneiesByMaintenance:
         self.main_color = main_color
 
 
-    @classmethod
-    def output_maker(cls, projects):
+    @staticmethod
+    def output_maker(projects):
         dictionary = {}
         for row in projects:
             if row.company_name not in dictionary and row.maintenance_requested != "true":
@@ -33,6 +33,6 @@ class CompaneiesByMaintenance:
                 for i in v:
                     if "false" == i:
                         a += 1
-                sublist.append(a*8)
+                sublist.append(a*15)
                 list.append(sublist)
         return list

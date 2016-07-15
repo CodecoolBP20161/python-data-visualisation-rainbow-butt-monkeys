@@ -20,6 +20,28 @@ sql_3 = "SELECT name, budget_value, budget_currency, main_color FROM project;"
 sql_4 = """SELECT "name", company_name, maintenance_requested, main_color FROM project"""
 sql_5 = "SELECT company_name, COUNT(manager) FROM project GROUP BY company_name"
 sql_6 = "SELECT company_name, main_color FROM project"
+sql_7 = """SELECT "name", main_color FROM project WHERE status = 4"""
+
+def project_name_by_status():
+    try:
+        cursor.execute(sql_7)
+        results_7 = cursor.fetchall()
+        dictionary = {}
+        for row in results_7:
+            if row[0] not in dictionary and row[0] != None:
+                dictionary.setdefault(row[0], [])
+                dictionary[row[0]].append(row[1])
+
+        for k, v in dictionary.items():
+            dictionary[k] = TextBox.avg_color(v)
+
+        for k, v in dictionary.items():
+            Picture.add_to_textboxes(v, 50, k)
+
+        Picture.drawer("project_name_by_status.png")
+
+    except Exception as e:
+        print(e)
 
 
 def companies_by_project_number():
@@ -43,7 +65,7 @@ def companies_by_project_number():
             if i[1] != 0:
                 for k, v in dictionary.items():
                     if i[0] == k:
-                        Picture.add_to_textboxes(dictionary[k], 25*int(i[1]), k)
+                        Picture.add_to_textboxes(dictionary[k], 15*int(i[1]), k)
 
         Picture.drawer("companies_by_project_number.png")
 
@@ -130,7 +152,7 @@ def companies_by_manager_number():
             if i[1] != 0:
                 for k, v in dictionary.items():
                     if i[0] == k:
-                        Picture.add_to_textboxes(dictionary[k], 25*int(i[1]), k)
+                        Picture.add_to_textboxes(dictionary[k], 10*int(i[1]), k)
 
         Picture.drawer("companies_by_manager_number.png")
 
@@ -146,32 +168,37 @@ def menu():
 2. - Picture about the budget statics                    )
 3. - Picture about the maintenance statics.              )
 4. - Picture about the Companies with the most managers. )
-5. - Exit.                                               )
+5. - Picture about project name by status                )
+6. - Exit.                                               )
 ---------------------------------------------------------"""
 
     print(menu)
-    try:
-        select = int(input("Pick a number:"))
-    except:
-        print("Invalid key !")
-        exit()
 
-    if select == 1:
-        companies_by_project_number()
-        img = Image.open('companies_by_project_number.png')
-        img.show()
-    elif select == 2:
-        projects_by_currency()
-        img = Image.open('projects_by_currency.png')
-        img.show()
-    elif select == 3:
-        companies_by_maintenance()
-        img = Image.open('companies_by_maintenance.png')
-        img.show()
-    elif select == 4:
-        companies_by_manager_number()
-        img = Image.open('companies_by_manager_number.png')
-        img.show()
-    else:
-        exit()
 menu()
+try:
+    select = int(input("Pick a number:"))
+except:
+    print("Invalid key !")
+    exit()
+if select == 1:
+    companies_by_project_number()
+    img = Image.open('companies_by_project_number.png')
+    img.show()
+elif select == 2:
+    projects_by_currency()
+    img = Image.open('projects_by_currency.png')
+    img.show()
+elif select == 3:
+    companies_by_maintenance()
+    img = Image.open('companies_by_maintenance.png')
+    img.show()
+elif select == 4:
+    companies_by_manager_number()
+    img = Image.open('companies_by_manager_number.png')
+    img.show()
+elif select == 5:
+    project_name_by_status()
+    img = Image.open('project_name_by_status.png')
+    img.show()
+else:
+    exit()
