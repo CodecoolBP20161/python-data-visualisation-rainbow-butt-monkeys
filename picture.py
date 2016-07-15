@@ -59,7 +59,7 @@ class Picture():
         draw = ImageDraw.Draw(img)
         for i in self.list_of_textboxes:
             fnt = ImageFont.truetype("DK Cinnabar Brush.ttf", i.size)
-            text_content = i.company_name
+            text_content = i.name
             text_size = draw.textsize(text_content, font=fnt)
             temp_coord = Picture.put_in_list(text_size)
             draw.text(temp_coord[0], text_content, font=fnt, fill=i.color)

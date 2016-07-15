@@ -152,7 +152,7 @@ def companies_by_manager_number():
             if i[1] != 0:
                 for k, v in dictionary.items():
                     if i[0] == k:
-                        Picture.add_to_textboxes(dictionary[k], 10*int(i[1]), k)
+                        Picture.add_to_textboxes(dictionary[k], 20*int(i[1]), k)
 
         Picture.drawer("companies_by_manager_number.png")
 

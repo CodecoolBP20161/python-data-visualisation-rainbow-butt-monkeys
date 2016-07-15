@@ -33,6 +33,6 @@ class CompaneiesByMaintenance:
                 for i in v:
                     if "false" == i:
                         a += 1
-                sublist.append(a*15)
+                sublist.append(a*30)
                 list.append(sublist)
         return list

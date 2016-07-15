@@ -2,7 +2,7 @@
 class TextBox():
 
     def __init__(self, name, color, size):
-        self.company_name = name
+        self.name = name
         self.color = color
         self.size = size
         self.coordinate = ((0,0),(0,0))
